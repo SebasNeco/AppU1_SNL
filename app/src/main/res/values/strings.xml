@@ -55,6 +55,7 @@
     <string name="shr_button_next">Next</string>
     <string name="shr_button_cancel">Cancel</string>
     <string name="shr_error_password">El password no tiene como minimo 8 caracteres</string>
+    <string name="shr_error_username">El username no tiene como minimo 3 caracteres</string>
     <string name="Bienvenida"> Bienvenido %s</string>
     <string name="app_name">AppU1_SNL</string>
     <string name="strBtnFormulario">Formulario</string>
@@ -65,12 +66,25 @@
     <string name="strtxtILDni">DNI</string>
     <string name="strtxtILNombreCliente">Nombre</string>
     <string name="strBtnGuardar">Guardar</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuraciones</string>
     <string name="strtxtILServidor">Servidor</string>
+    <string name="strtxtILNombrePaciente">Nombres y Apellidos</string>
     <string name="strtxtILIdioma">Idioma</string>
+    <string name="strtxtILEspecialista">Especialista</string>
+    <string name="strtxtILObservaciones">Observaciones</string>
+    <string name="strtxtILPrecioConsulta">Precio Consulta</string>
     <string name="strtxtILFecha">Fecha</string>
+    <string name="strtxtILNumCama">Numero Cama</string>
+    <string name="strtxtILEnlace1">Enlace </string>
+    <string name="strtxtILEnlace2">Enlace imagen</string>
     <string name="strtxtILHora">Hora</string>
-    <string name="shr_product_title">Titulo</string>
-    <string name="shr_product_description">Descripcion</string>
+    <string name="strtxtILNumHistoria">Numero de Historia</string>
+    <string name="shr_product_title">Sebastian Neco</string>
+    <string name="shr_product_description">Traumatologia</string>
     <string name="home_fragment_label">Home Fragment</string>
+    <string name="pass">123456789</string>
+    <string name="user">admin</string>
+    <string name="action_Home">Home</string>
+    <string name="action_Paciente">Paciente</string>
+    <string name="action_logout">Cerrar Sesion</string>
 </resources>

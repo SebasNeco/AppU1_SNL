@@ -2,6 +2,8 @@ package com.example.appu1_snl;
 
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -64,9 +66,27 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
 
-        if(id==R.id.action_formulario) {
+//        if(id==R.id.action_formulario) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.nav_host_fragment_content_main, new FormularioFragment())
+//                    .addToBackStack(null)
+//                    .commit();
+//        }
+//        if(id==R.id.action_settings) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.nav_host_fragment_content_main, new ServidorFragment())
+//                    .addToBackStack(null)
+//                    .commit();
+//        }
+        if(id==R.id.action_Home) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_main, new FormularioFragment())
+                    .replace(R.id.nav_host_fragment_content_main, new HomeFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
+        if(id==R.id.action_Paciente) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, new PacienteFragment())
                     .addToBackStack(null)
                     .commit();
         }
@@ -76,8 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
         }
-
+        if(id==R.id.action_logout) {
+            SharedPreferences sharedPreferences = getSharedPreferences("SP_USAT", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override

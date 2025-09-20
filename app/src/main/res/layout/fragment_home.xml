@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <TextView
+        android:id="@+id/txtBienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Bienvenida"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="160dp"
         android:layout_height="180dp"
@@ -37,6 +48,7 @@
                 android:padding="2dp"
                 android:text="@string/shr_product_description"
                 android:textAppearance="?attr/textAppearanceBody2" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

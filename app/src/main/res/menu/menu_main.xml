@@ -3,16 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.appu1_snl.MainActivity">
 
+<!--    <item-->
+<!--        android:id="@+id/action_settings"-->
+<!--        android:orderInCategory="200"-->
+<!--        android:title="@string/action_settings"-->
+<!--        app:showAsAction="never"/>-->
+<!--    <item-->
+<!--        android:id="@+id/action_formulario"-->
+<!--        android:orderInCategory="200"-->
+<!--        android:title="@string/action_formulario"-->
+<!--        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_Home"
+        android:orderInCategory="200"
+        android:title="@string/action_Home"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_Paciente"
+        android:orderInCategory="200"
+        android:title="@string/action_Paciente"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="200"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_formulario"
+        android:id="@+id/action_logout"
         android:orderInCategory="200"
-        android:title="@string/action_formulario"
-        app:showAsAction="never" />
+        android:title="@string/action_logout"
+        app:showAsAction="never"/>
+
+
+
+
+
 
 
 </menu>

@@ -55,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@string/user"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +74,8 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:text="@string/pass"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
@@ -100,8 +102,8 @@
                 android:layout_toStartOf="@id/next_button"
                 android:text="@string/shr_button_cancel"
                 style="@style/Widget.USAT.Button.TextButton"/>
-
         </RelativeLayout>
+
 
 <!--        <RadioGroup-->
 <!--            android:id="@+id/radioGroup"-->

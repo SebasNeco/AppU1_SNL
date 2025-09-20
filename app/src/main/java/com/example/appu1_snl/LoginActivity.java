@@ -29,12 +29,19 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.nextButton.setOnClickListener(v -> {
+
             if (!isPasswordValid(binding.passwordEditText.getText())) {
                 binding.passwordTextInput.setError(getString(R.string.shr_error_password));
             } else {
-                binding.passwordTextInput.setError(null); // Clear the error
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                if (!isUsernameValid(binding.txtUsername.getText())) {
+                    binding.txtILUsername.setError(getString(R.string.shr_error_username));
+
+                } else{
+                    binding.txtILUsername.setError(null);
+                    binding.passwordTextInput.setError(null); // Clear the error
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
 
             SharedPreferences sharedPreferences = getSharedPreferences("SP_USAT", MODE_PRIVATE);
@@ -50,6 +57,17 @@ public class LoginActivity extends AppCompatActivity {
                     binding.passwordTextInput.setError(null); //Clear the error
                 }
                 return false;
+
+            }
+        });
+
+        binding.txtUsername.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (isUsernameValid(binding.txtUsername.getText())) {
+                    binding.txtILUsername.setError(null); //Clear the error
+                }
+                return false;
             }
         });
 
@@ -62,6 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(@Nullable Editable text) {
         return text != null && text.length() >= 8;
+    }
+    private boolean isUsernameValid(@Nullable Editable text) {
+        return text != null && text.length() >= 3;
     }
 
 }

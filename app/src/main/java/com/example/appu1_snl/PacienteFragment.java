@@ -1,7 +1,5 @@
 package com.example.appu1_snl;
 
-
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,16 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.appu1_snl.databinding.FragmentSecondBinding;
-import com.example.appu1_snl.databinding.FragmentServidorBinding;
+import com.example.appu1_snl.databinding.FragmentPacienteBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ServidorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ServidorFragment extends Fragment {
-    private FragmentServidorBinding binding;
+public class PacienteFragment extends Fragment {
+
+    private FragmentPacienteBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,21 +28,12 @@ public class ServidorFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ServidorFragment() {
+    public PacienteFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ServidorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ServidorFragment newInstance(String param1, String param2) {
-        ServidorFragment fragment = new ServidorFragment();
+    public static PacienteFragment newInstance(String param1, String param2) {
+        PacienteFragment fragment = new PacienteFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,9 +51,9 @@ public class ServidorFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentServidorBinding.inflate(inflater, container, false);
+        binding = FragmentPacienteBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -79,21 +63,46 @@ public class ServidorFragment extends Fragment {
 
         binding.btnGuardar.setOnClickListener(v -> {
 
-            boolean allFieldsValid = isCampoValido(binding.txtServidor.getText()) &&
-                    isCampoValido(binding.txtIdioma.getText());
+            boolean allFieldsValid = isCampoValido(binding.txtNombrePaciente.getText()) &&
+                    isCampoValido(binding.txtEspecialista.getText()) &&
+                    isCampoValido(binding.txtObservaciones.getText()) &&
+                    isPrecioValido(binding.txtPrecioConsulta.getText()) &&
+                    isCampoValido(binding.txtNumHistoria.getText()) &&
+                    isCampoValido(binding.txtNumCama.getText()) &&
+                    isCampoValido(binding.txtEnlace1.getText()) &&
+                    isCampoValido(binding.txtEnlace2.getText());
+
             if (allFieldsValid) {
                 Toast.makeText(getActivity(), "Registro correcto", Toast.LENGTH_SHORT).show();
-                binding.txtServidor.setText("");
-                binding.txtIdioma.setText("");
-                binding.txtServidor.requestFocus();
+                binding.txtNombrePaciente.setText("");
+                binding.txtEspecialista.setText("");
+                binding.txtObservaciones.setText("");
+                binding.txtPrecioConsulta.setText("");
+                binding.txtNumHistoria.setText("");
+                binding.txtNumCama.setText("");
+                binding.txtEnlace1.setText("");
+                binding.txtEnlace2.setText("");
+                binding.txtNombrePaciente.requestFocus();
             } else {
                 Toast.makeText(getActivity(), "Registro incorrecto. Verifique los campos.", Toast.LENGTH_LONG).show();
+
             }
         });
-
     }
 
     private boolean isCampoValido(@Nullable Editable text){
         return text != null && !TextUtils.isEmpty(text);
+    }
+
+    private boolean isPrecioValido(@Nullable Editable text) {
+        if (TextUtils.isEmpty(text)) {
+            return false;
+        }
+        try {
+            double precio = Double.parseDouble(text.toString());
+            return precio >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
