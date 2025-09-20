@@ -2,12 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#E0E0E0</color>
-    <color name="colorPrimaryDark">#FBB8AC</color>
-    <color name="colorAccent">#FEDBD0</color>
-    <color name="screenBackground">#2196F3</color>
-    <color name="screenBackground2">#26C6DA</color>
-    <color name="textInputOutlineColor">#FBB8AC</color>
-    <color name="textColorPrimary">#442C2E</color>
-    <color name="toolbarIconColor">#FFFFFF</color>
+    <color name="colorPrimary">#FFB74D</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+    <color name="colorAccent">#FF8A65</color>
+    <color name="screenBackground">#FFF3E0</color>
+    <color name="screenBackground2">#FFE0B2</color>
+    <color name="textColorPrimary">#4E342E</color>
+    <color name="toolbarIconColor">#FFFFFFFF</color>
+    <color name="colorPrimary_Night">#37474F</color>
+    <color name="colorPrimaryDark_Night">#102027</color>
+    <color name="colorAccent_Night">#BB86FC</color>
+    <color name="screenBackground_Night">#121212</color>
+    <color name="screenBackground2_Night">#1E1E1E</color>
+    <color name="textColorPrimary_Night">#E0E0E0</color>
+    <color name="toolbarIconColor_Night">#FFFFFF</color>
 </resources>

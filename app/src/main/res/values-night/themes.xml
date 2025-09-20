@@ -1,7 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AppU1_SNL" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Theme.AppU1_SNL.Night" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary_Night</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Night</item>
+        <item name="colorAccent">@color/colorAccent_Night</item>
+        <item name="android:colorBackground">@color/screenBackground_Night</item>
+        <item name="colorSurface">@color/screenBackground2_Night</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary_Night</item>
+        <item name="colorOnPrimary">@color/toolbarIconColor_Night</item>
+        <item name="colorOnBackground">@color/textColorPrimary_Night</item>
     </style>
+
+    <style name="Theme.AppU1_SNL" parent="Theme.AppU1_SNL.Night"/>
 </resources>

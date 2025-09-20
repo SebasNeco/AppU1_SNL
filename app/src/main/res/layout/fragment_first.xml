@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/screenBackground">
+    android:background="?android:colorBackground">
 
     <TextView
         android:id="@+id/txtBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Bienvenida"
-        android:textColor="@android:color/white"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/hello_fragment"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnBackground"
         android:textSize="92sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

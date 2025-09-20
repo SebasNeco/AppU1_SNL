@@ -1,21 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.AppU1_SNL" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="android:colorBackground">@color/screenBackground</item>
+        <item name="colorSurface">@color/screenBackground2</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="colorOnPrimary">@color/toolbarIconColor</item>
+        <item name="colorOnBackground">@color/textColorPrimary</item>
     </style>
 
     <style name="Theme.AppU1_SNL" parent="Base.Theme.AppU1_SNL" />
 
     <style name="Widget.USAT.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/TextAppearance.USAT.TextInputLayout.HintText</item>
-        <item name="hintTextColor">@color/textColorPrimary</item>
+        <item name="hintTextColor">?android:attr/textColorPrimary</item>
         <item name="android:paddingBottom">8dp</item>
-        <item name="boxStrokeColor">@color/textInputOutlineColor</item>
+        <item name="boxStrokeColor">?attr/colorPrimary</item>
     </style>
 
     <style name="TextAppearance.USAT.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
