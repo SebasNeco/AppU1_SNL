@@ -13,7 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.appu1_snl.Interface.JsonPlaceHolderApi;
 import com.example.appu1_snl.databinding.ActivityLoginBinding;
+import com.example.appu1_snl.model.Post;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -26,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
 
         binding.nextButton.setOnClickListener(v -> {
@@ -61,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         binding.txtUsername.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -71,11 +84,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        getPosts();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
     }
 
     private boolean isPasswordValid(@Nullable Editable text) {
@@ -83,6 +101,41 @@ public class LoginActivity extends AppCompatActivity {
     }
     private boolean isUsernameValid(@Nullable Editable text) {
         return text != null && text.length() >= 3;
+    }
+
+    private void getPosts(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<List<Post>> call = jsonPlaceHolderApi.obtenerPublicaciones();
+        call.enqueue(new Callback<List<Post>>(){
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response){
+                if (!response.isSuccessful()){
+                    binding.jsonText.setText("Code: " + response.code());
+                    return;
+                }
+                List<Post> listaPublicaciones = response.body();
+                if (listaPublicaciones != null){
+                    for (Post post : listaPublicaciones){
+                        String cotenido="";
+                        cotenido += "UserId: " + post.getUserId() + "\n";
+                        cotenido += "Id: " + post.getId() + "\n";
+                        cotenido += "Title: " + post.getTitle() + "\n";
+                        cotenido += "Body: " + post.getBody() + "\n\n";
+                        binding.jsonText.append(cotenido);
+                    }
+                } else{
+                    binding.jsonText.setText("No hay publicaciones");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t){
+                binding.jsonText.setText(t.getMessage());
+            }
+        });
     }
 
 }
