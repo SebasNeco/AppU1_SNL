@@ -8,6 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface JsonPlaceHolderApi {
-    @GET("/post")
+    @GET("/posts")
     Call<List<Post>> obtenerPublicaciones();
 }
