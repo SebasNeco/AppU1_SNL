@@ -1,6 +1,7 @@
 package com.example.appu1_snl;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,8 +14,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.appu1_snl.Interface.DAMusatAPI;
 import com.example.appu1_snl.databinding.FragmentFirstBinding;
 import com.example.appu1_snl.databinding.FragmentHomeBinding;
+import com.example.appu1_snl.model.AuthRequest;
+import com.example.appu1_snl.model.AuthResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,10 +84,15 @@ public class HomeFragment extends Fragment {
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences sharedPreferences= getActivity().getSharedPreferences("SP_USAT", getActivity().MODE_PRIVATE);
-        String username=sharedPreferences.getString("username", "");
-        // String countText= getString(R.string.random_heading, count);
-        String saludo=getString(R.string.Bienvenida, username);
-        binding.txtBienvenida.setText(saludo);
+        getDataJson();
+    }
+
+    public void getDataJson(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://sebasneco.pythonanywhere.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        DAMusatAPI damusatAPI = retrofit.create(DAMusatAPI.class);
+
     }
 }

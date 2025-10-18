@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -14,8 +15,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.appu1_snl.Interface.DAMusatAPI;
 import com.example.appu1_snl.Interface.JsonPlaceHolderApi;
 import com.example.appu1_snl.databinding.ActivityLoginBinding;
+import com.example.appu1_snl.model.AuthRequest;
+import com.example.appu1_snl.model.AuthResponse;
 import com.example.appu1_snl.model.Post;
 import com.example.appu1_snl.model.generandoJson;
 
@@ -51,9 +55,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else{
                     binding.txtILUsername.setError(null);
-                    binding.passwordTextInput.setError(null); // Clear the error
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
+                    binding.passwordTextInput.setError(null);
+                    getToken();
                 }
             }
 
@@ -61,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("username", binding.txtUsername.getText().toString());
             editor.apply();
+
         });
 
         binding.passwordEditText.setOnKeyListener(new View.OnKeyListener() {
@@ -85,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -104,36 +108,39 @@ public class LoginActivity extends AppCompatActivity {
         return text != null && text.length() >= 3;
     }
 
-    /**private void getPosts(){
+    private void getToken(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://sebasneco.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Call<List<Post>> call = jsonPlaceHolderApi.obtenerPublicaciones();
-        call.enqueue(new Callback<List<Post>>() {
+        DAMusatAPI damusatAPI = retrofit.create(DAMusatAPI.class);
+        AuthRequest authRequest = new AuthRequest();
+        authRequest.setUsername(binding.txtUsername.getText().toString());
+        authRequest.setPassword(binding.passwordEditText.getText().toString());
+        Call<AuthResponse> call = damusatAPI.obtenerToken(authRequest);
+        call.enqueue(new Callback<AuthResponse>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                if(!response.isSuccessful()){
-                    binding.jsonText.setText("Codigo: " + response.code());
+            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
-                List<Post> listaPublicaciones = response.body();
-                for(Post posts : listaPublicaciones){
-                    String contenido = "";
-                    contenido += "UserId: " + posts.getUserId() + "\n";
-                    contenido += "Id: " + posts.getId() + "\n";
-                    contenido += "Title: " + posts.getTitle() + "\n";
-                    contenido += "Body: " + posts.getBody();
-                    binding.jsonText.append(contenido);
-                }
+                AuthResponse authResponse= response.body();
+                SharedPreferences sharedPreferences = getSharedPreferences("SP_USAT", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", binding.txtUsername.getText().toString());
+                editor.putString("tokenJWT", authResponse != null ? authResponse.getAccess_token() : null);
+                editor.apply();
+
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
             }
+
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                binding.jsonText.setText(t.getMessage());
+            public void onFailure(Call<AuthResponse> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });**/
-
-
+        });
+    }
 
 }
 

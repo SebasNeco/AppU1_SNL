@@ -66,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
 
-//        if(id==R.id.action_formulario) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.nav_host_fragment_content_main, new FormularioFragment())
-//                    .addToBackStack(null)
-//                    .commit();
-//        }
+        if(id==R.id.action_formulario) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, new FormularioFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
 //        if(id==R.id.action_settings) {
 //            getSupportFragmentManager().beginTransaction()
 //                    .replace(R.id.nav_host_fragment_content_main, new ServidorFragment())

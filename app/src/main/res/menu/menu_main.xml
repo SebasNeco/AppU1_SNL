@@ -8,11 +8,11 @@
 <!--        android:orderInCategory="200"-->
 <!--        android:title="@string/action_settings"-->
 <!--        app:showAsAction="never"/>-->
-<!--    <item-->
-<!--        android:id="@+id/action_formulario"-->
-<!--        android:orderInCategory="200"-->
-<!--        android:title="@string/action_formulario"-->
-<!--        app:showAsAction="never" />-->
+    <item
+        android:id="@+id/action_formulario"
+        android:orderInCategory="200"
+        android:title="@string/action_formulario"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_Home"
         android:orderInCategory="200"
@@ -33,6 +33,7 @@
         android:orderInCategory="200"
         android:title="@string/action_logout"
         app:showAsAction="never"/>
+
 
 
 
