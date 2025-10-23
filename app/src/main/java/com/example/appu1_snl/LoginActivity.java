@@ -117,22 +117,29 @@ public class LoginActivity extends AppCompatActivity {
         AuthRequest authRequest = new AuthRequest();
         authRequest.setUsername(binding.txtUsername.getText().toString());
         authRequest.setPassword(binding.passwordEditText.getText().toString());
+        SharedPreferences sharedPreferences = getSharedPreferences("SP_USAT", MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.remove("tokenJWT");
+        sharedPrefEditor.apply();
         Call<AuthResponse> call = damusatAPI.obtenerToken(authRequest);
         call.enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
-                }
-                AuthResponse authResponse= response.body();
-                SharedPreferences sharedPreferences = getSharedPreferences("SP_USAT", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", binding.txtUsername.getText().toString());
-                editor.putString("tokenJWT", authResponse != null ? authResponse.getAccess_token() : null);
-                editor.apply();
+                if (response.isSuccessful() && response.body() != null) {
+                    AuthResponse authResponse = response.body();
+                    SharedPreferences.Editor editor = getSharedPreferences("SP_USAT", MODE_PRIVATE).edit();
+                    editor.putString("username", binding.txtUsername.getText().toString());
+                    editor.putString("tokenJWT", authResponse.getAccess_token());
+                    editor.apply();
 
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                startActivity(intent);
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    String message = !response.isSuccessful()
+                            ? "Code: " + response.code()
+                            : "Respuesta inválida del servidor.";
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

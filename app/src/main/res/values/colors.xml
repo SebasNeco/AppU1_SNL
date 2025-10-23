@@ -16,4 +16,5 @@
     <color name="screenBackground2_Night">#1E1E1E</color>
     <color name="textColorPrimary_Night">#E0E0E0</color>
     <color name="toolbarIconColor_Night">#FFFFFF</color>
+    <color name="personaGridBackgroundColor">#FFFFFF</color>
 </resources>

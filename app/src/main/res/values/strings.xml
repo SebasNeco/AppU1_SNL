@@ -79,7 +79,8 @@
     <string name="strtxtILEnlace2">Enlace imagen</string>
     <string name="strtxtILHora">Hora</string>
     <string name="strtxtILNumHistoria">Numero de Historia</string>
-    <string name="shr_product_title">Sebastian Neco</string>
+    <string name="persona_nombre">Sebastian Neco</string>
+    <string name="persona_dni">87465321</string>
     <string name="shr_product_description">Traumatologia</string>
     <string name="home_fragment_label">Home Fragment</string>
     <string name="pass">123456789</string>

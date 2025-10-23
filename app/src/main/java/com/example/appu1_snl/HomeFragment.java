@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.appu1_snl.databinding.FragmentFirstBinding;
 import com.example.appu1_snl.databinding.FragmentHomeBinding;
 import com.example.appu1_snl.model.AuthRequest;
 import com.example.appu1_snl.model.AuthResponse;
+import com.example.appu1_snl.model.GuardarPersonaRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,8 +81,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        RecyclerView recyclerView=binding.recyclerView;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,
+                GridLayoutManager.VERTICAL,false));
+        PersonaCardRecycleViewAdapter adapter=new PersonaCardRecycleViewAdapter(null);
+        recyclerView.setAdapter(adapter);
+        int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
+        int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
+        recyclerView.addItemDecoration(new PersonaGridItemDecoration(largePadding, smallPadding));
         return binding.getRoot();
         // Inflate the layout for this fragment
+
 
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

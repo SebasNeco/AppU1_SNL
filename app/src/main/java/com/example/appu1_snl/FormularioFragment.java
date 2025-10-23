@@ -88,19 +88,35 @@ public class FormularioFragment extends Fragment {
           /*binding.btnGuardar.setOnClickListener(v ->
                   Toast.makeText(getActivity(), "Guardado exitosamente",
                           Toast.LENGTH_SHORT).show());*/
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SP_USAT",
-                Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(
+                "SP_USAT", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("tokenJWT", "");
+        String sanitizedToken = token != null ? token.trim() : "";
+        if (sanitizedToken.isEmpty()) {
+            Toast.makeText(requireContext(), "Debe autenticarse para continuar",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                procesarGuardar("JWT " + token);
+                if (token.isEmpty()) {
+                    return;
+                }
+                procesarGuardar(sanitizedToken);
+                String authorizationHeader = "JWT " + token;
+
             }
         });
 
     }
 
-    private void procesarGuardar(String valorHeader) {
+    private void procesarGuardar(@NonNull String token) {
+        if (token.isEmpty()) {
+            return;
+        }
+        String authorizationHeader = "JWT " + token;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sebasneco.pythonanywhere.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -110,7 +126,7 @@ public class FormularioFragment extends Fragment {
         guardarPersonaRequest.setDni(binding.txtDni.getText().toString());
         guardarPersonaRequest.setNombre(binding.txtNombreCliente.getText().toString());
 
-        Call<RptaGeneral> call = dambUsatApi.guardarPersona(valorHeader, guardarPersonaRequest);
+        Call<RptaGeneral> call = dambUsatApi.guardarPersona(authorizationHeader, guardarPersonaRequest);
         call.enqueue(new Callback<RptaGeneral>() {
             @Override
             public void onResponse(Call<RptaGeneral> call, Response<RptaGeneral> response) {
