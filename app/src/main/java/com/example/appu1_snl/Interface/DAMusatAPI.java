@@ -21,4 +21,6 @@ public interface DAMusatAPI {
     @POST ("api_guardar_persona")
     Call<RptaGeneral> guardarPersona(@Header("Authorization") String authorization,
                                      @Body GuardarPersonaRequest body);
+    @GET("api_obtenerPersonas")
+    Call<RptaGeneral> obtenerPersonas();
 }
