@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
                     Object objeto=rptaGeneral.getData();
                     List<PersonaEntry> listaPersona= (List<PersonaEntry>) objeto;
                     for (int indice=0;indice<listaPersona.size();indice++){
-                        Log.d("XYZ",listaPersona.get(indice).toString());
+                        Log.d("XYZ",listaPersona.getClass().toString());
                     }
                     RecyclerView recyclerView=binding.recyclerView;
                     recyclerView.setHasFixedSize(true);
