@@ -88,4 +88,6 @@
     <string name="action_Home">Home</string>
     <string name="action_Paciente">Paciente</string>
     <string name="action_logout">Cerrar Sesion</string>
+    <string name="username_test">jcachay@usat.edu.pe</string>
+    <string name="password_test">very-secret</string>
 </resources>

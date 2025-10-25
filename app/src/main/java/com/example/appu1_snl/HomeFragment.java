@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,6 +107,9 @@ public class HomeFragment extends Fragment {
                     RptaGeneral rptaGeneral = response.body();
                     Object objeto=rptaGeneral.getData();
                     List<PersonaEntry> listaPersona= (List<PersonaEntry>) objeto;
+                    for (int indice=0;indice<listaPersona.size();indice++){
+                        Log.d("XYZ",listaPersona.get(indice).toString());
+                    }
                     RecyclerView recyclerView=binding.recyclerView;
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,

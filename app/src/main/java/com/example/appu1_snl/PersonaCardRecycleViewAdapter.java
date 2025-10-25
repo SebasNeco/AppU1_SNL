@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PersonaCardRecycleViewAdapter extends RecyclerView.Adapter<PersonaCardViewHolder>{
     private List<PersonaEntry> personaList;
     private ImageRequester imageRequester;
     public PersonaCardRecycleViewAdapter(List<PersonaEntry> personaList){
-        this.personaList=personaList;
+        this.personaList = personaList != null ? personaList : Collections.emptyList();
         imageRequester=ImageRequester.getInstance();
     }
 
@@ -27,7 +28,10 @@ public class PersonaCardRecycleViewAdapter extends RecyclerView.Adapter<PersonaC
 
     @Override
     public void onBindViewHolder(@NonNull PersonaCardViewHolder holder, int position) {
-
+        PersonaEntry persona=personaList.get(position);
+        holder.personaDni.setText(persona.dni);
+        holder.personaName.setText(persona.nombre);
+        imageRequester.setImageFromUrl(holder.personaImage,persona.url);
     }
 
     @Override
