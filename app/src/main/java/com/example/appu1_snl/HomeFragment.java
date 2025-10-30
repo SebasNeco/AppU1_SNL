@@ -24,6 +24,8 @@ import com.example.appu1_snl.model.AuthRequest;
 import com.example.appu1_snl.model.AuthResponse;
 import com.example.appu1_snl.model.GuardarPersonaRequest;
 import com.example.appu1_snl.model.RptaGeneral;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -91,9 +93,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void cargaInicialHome(){
+        Gson desPer= new GsonBuilder().setLenient().registerTypeAdapter(RptaGeneral.class,
+                new DeserealizadorPersonalizado()).create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sebasneco.pythonanywhere.com/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(desPer))
                 .build();
         DAMusatAPI dambUsatApi = retrofit.create(DAMusatAPI.class);
         Call<RptaGeneral> call = dambUsatApi.obtenerPersonas();
@@ -105,8 +109,7 @@ public class HomeFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                 } else{
                     RptaGeneral rptaGeneral = response.body();
-                    Object objeto=rptaGeneral.getData();
-                    List<PersonaEntry> listaPersona= (List<PersonaEntry>) objeto;
+                    List<PersonaEntry> listaPersona= (List<PersonaEntry>) rptaGeneral.getData();
                     for (int indice=0;indice<listaPersona.size();indice++){
                         Log.d("XYZ",listaPersona.getClass().toString());
                     }
